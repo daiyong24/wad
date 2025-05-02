@@ -4,8 +4,8 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { TabNavigator } from '../App'; 
-import ProfileScreen from './ProfileScreen'; 
-import OtherScreen from './OtherScreen'; 
+import ProfileScreen from '../screens/ProfileScreen'; 
+import OtherScreen from '../screens/OtherScreen'; 
 
 const Drawer = createDrawerNavigator();
 
