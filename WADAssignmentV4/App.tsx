@@ -18,7 +18,7 @@ import BeverageScreen from './orderscreen/BeverageScreen';
 import PizzaScreen from './orderscreen/PizzaScreen';
 import DessertScreen from './orderscreen/DessertScreen';
 
-import PromotionCategories from './orderscreen/Promotions/PromotionCategories';
+import PromotionFoodDetailScreen from './orderscreen/DetailsScreen/PromotionFoodDetailScreen';
 
 // 1) Order Stack
 const Stack = createNativeStackNavigator();
@@ -32,7 +32,8 @@ function OrderStack() {
       <Stack.Screen name="Dessert" component={DessertScreen} options={{ title: 'Dessert' }} />
       <Stack.Screen name="Pizza" component={PizzaScreen} options={{ title: 'Pizza' }} />
       <Stack.Screen name="Beverage" component={BeverageScreen} options={{ title: 'Beverage' }} />
-      <Stack.Screen name="Pasta" component={PromotionCategories} options={{ title: 'Pasta' }} />
+      <Stack.Screen name="PromotionFoodDetail" component={PromotionFoodDetailScreen} options={{ title: 'Food Detail' }} />
+      <Stack.Screen name="AddToCart" component={require('./screens/AddToCartScreen').default} options={{ title: 'Your Cart' }} />
     </Stack.Navigator>
   );
 }

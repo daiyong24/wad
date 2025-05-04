@@ -8,33 +8,43 @@ import {
   Image,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// Make sure these IDs exactly match your Stack.Screen names
 const categories = [
   { id: 'Promotion', title: 'Promotion', image: require('../assets/promo.png') },
   { id: 'Burger',    title: 'Burger',    image: require('../assets/burger.png') },
   { id: 'Noodle',    title: 'Noodle',    image: require('../assets/noodle.png') },
-  { id: 'Pizza',     title: 'Pizza',    image: require('../assets/Pizza.png') },
-  { id: 'Dessert',   title: 'Dessert',    image: require('../assets/Dessert.png') },
-  { id: 'Beverage',  title: 'Beverage',    image: require('../assets/Beverage.png') },
+  { id: 'Pizza',     title: 'Pizza',     image: require('../assets/Pizza.png') },
+  { id: 'Dessert',   title: 'Dessert',   image: require('../assets/Dessert.png') },
+  { id: 'Beverage',  title: 'Beverage',  image: require('../assets/Beverage.png') },
 ];
 
 export default function OrderScreen() {
   const navigation = useNavigation();
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {categories.map(cat => (
-        <TouchableOpacity
-          key={cat.id}
-          style={styles.card}
-          onPress={() => navigation.navigate(cat.id)}
-        >
-          <Image source={cat.image} style={styles.icon} />
-          <Text style={styles.label}>{cat.title}</Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+    <View style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={styles.container}>
+        {categories.map(cat => (
+          <TouchableOpacity
+            key={cat.id}
+            style={styles.card}
+            onPress={() => navigation.navigate(cat.id)}
+          >
+            <Image source={cat.image} style={styles.icon} />
+            <Text style={styles.label}>{cat.title}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      {/* Floating Add-to-Cart button */}
+      <TouchableOpacity
+        style={styles.fab}
+        onPress={() => navigation.navigate('AddToCart')}
+      >
+        <MaterialCommunityIcons name="cart" size={28} color="#fff" />
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -69,5 +79,21 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 20,
     fontWeight: '600',
+  },
+  fab: {
+    position: 'absolute',
+    bottom: 16,
+    right: 16,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: '#e91e63',    // or your theme color
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 6,                // Android shadow
+    shadowColor: '#000',         // iOS shadow
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
   },
 });
