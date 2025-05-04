@@ -79,7 +79,7 @@ export default function SignUp() {
          
             <View style={{ height: 80 }} />
               <Image
-                source={require('../images/temp_logo.jpg')}
+                source={require('../assets/temp_logo.png')}
                 style={styles.logo}
                />
 
