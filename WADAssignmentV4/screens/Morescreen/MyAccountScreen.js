@@ -22,7 +22,7 @@ const MyAccountScreen=()=>{
 
     const fetchUserData= async() =>{
         try{
-            const response =await fetch('http://10.0.2.2:5000/api/users/1');
+            const response =await fetch(`http://10.0.2.2:5000/api/users/${user.id}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
