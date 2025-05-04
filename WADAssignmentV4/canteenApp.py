@@ -68,15 +68,59 @@ def initialize_database():
         
        
         sample_menu = [
-            ('Chicken Rice', 'Main', 4.50),
-            ('Fish and Chips', 'Main', 6.80),
-            ('Vegetable Salad', 'Side', 3.20),
-            ('Iced Tea', 'Beverage', 1.50)
-        ]
-        db.executemany('INSERT INTO menu(name, category, price) VALUES(?,?,?)', sample_menu)
+            # Promotion items
+            ("Weekend Special Combo", "promotion", 8.99),
+            ("Student Meal Deal", "promotion", 5.50),
+            ("Family Bundle", "promotion", 15.99),
+            
+            # Burger items
+            ("Classic Cheeseburger", "burger", 4.99),
+            ("Bacon BBQ Burger", "burger", 6.49),
+            ("Veggie Delight Burger", "burger", 5.25),
+            
+            # Noodle items
+            ("Meatball Pasta", "noodle", 7.50),
+            ("Seafood Agio Oglio", "noodle", 8.25),
+            ("Vegetable Lo Mein", "noodle", 6.75),
+            
+            # Pizza items
+            ("Margherita Pizza", "pizza", 9.99),
+            ("Pepperoni Feast", "pizza", 11.50),
+            ("Hawaiian Pizza", "pizza", 10.75),
+            
+            # Dessert items
+            ("Chocolate Brownie", "dessert", 3.50),
+            ("Apple Pie", "dessert", 3.75),
+            ("Ice Cream Sundae", "dessert", 4.25),
+            
+            # Beverage items
+            ("Iced Tea", "beverage", 1.99),
+            ("Fresh Orange Juice", "beverage", 2.50),
+            ("Soda Can", "beverage", 1.25)
+            ]
         
+        db.executemany('INSERT INTO menu(name, category, price) VALUES(?,?,?)', sample_menu)
+    
+        db.execute('''INSERT INTO users (name, email, number, password, points) VALUES(?, ?, ?, ?, ?) ''',
+           (
+               "YONG",
+               "jonnysin@gmail.com",
+               "123456789",
+               "password123",
+               150
+           ))
+        
+    
+        user_id = db.execute('SELECT last_insert_rowid()').fetchone()[0]
+        
+        
+        db.execute('''
+            INSERT INTO wallets (user_id, balance)
+            VALUES (?, ?)
+        ''', (user_id, 100.00))  
+
         db.commit()
-        print("Database with menu initialized successfully!")
+        print("Database started successfully!")
         
     except sqlite3.Error as e:
         print(f"Database error: {e}")

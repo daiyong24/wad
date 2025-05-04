@@ -7,7 +7,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import OrderScreen from './screens/OrderScreen';
 import HomeScreen from './screens/HomeScreen';
 import RewardScreen from './screens/RewardScreen';
-import SettingScreen from './screens/SettingScreen';
+import MoreScreen from './screens/Morescreen/MoreScreenDetails';
 import DrawerNavigator from './screens/Drawer'; // <--- Rename the import (DrawerNavigator)
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -61,15 +61,21 @@ const CustomButton = ({ children, onPress, accessibilityState }) => {
 };
 
 // Tab Navigator (Bottom Tabs)
-export const TabNavigator = () => { // <--- export it so Drawer can use
+export const TabNavigator = () => {
   return (
     <Tab.Navigator
-      screenOptions={({ navigation }) => ({
-        headerRight: () => (
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <MaterialCommunityIcons name="menu" size={30} color="black" style={{ marginLeft: 15 }}  drawerPosition = 'right'/>
-          </TouchableOpacity>
-        ),
+      screenOptions={({ route, navigation }) => ({
+        headerRight: () => 
+          route.name !== 'More' ? (
+            <TouchableOpacity onPress={() => navigation.openDrawer()}>
+              <MaterialCommunityIcons 
+                name="menu" 
+                size={30} 
+                color="black" 
+                style={{ marginLeft: 15 }}
+              />
+            </TouchableOpacity>
+          ) : null,
       })}
     >
       <Tab.Screen
@@ -114,9 +120,10 @@ export const TabNavigator = () => { // <--- export it so Drawer can use
           tabBarButton: (props) => <CustomButton {...props} />,
         }}
       />
-      <Tab.Screen
-        name="Setting"
-        component={SettingScreen}
+     <Tab.Screen
+        name="More"
+        component={MoreScreen}
+        
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
@@ -126,12 +133,15 @@ export const TabNavigator = () => { // <--- export it so Drawer can use
             />
           ),
           tabBarButton: (props) => <CustomButton {...props} />,
+          headerRight: () => 
+            <Image
+          source={require('./assets/temp_logo.png')} 
+          style={{ width: 150, height: 150, marginRight: 1.5 }}/>     
         }}
       />
     </Tab.Navigator>
   );
 };
-
 const App = () => {
   return (
     <NavigationContainer>
