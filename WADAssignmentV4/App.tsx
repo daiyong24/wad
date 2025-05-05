@@ -1,4 +1,4 @@
-import React from 'react';
+import React,  { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, TouchableNativeFeedback, TouchableOpacity, Text, Image, ScrollView, StyleSheet } from 'react-native';
@@ -20,6 +20,12 @@ import DessertScreen from './orderscreen/DessertScreen';
 
 import PromotionFoodDetailScreen from './orderscreen/DetailsScreen/PromotionFoodDetailScreen';
 
+//LenaNote: Double asterisk ('**') the comment mean something needs to be changed
+import Login from './userAccount/Login';//Import Login page
+import SignUp from './userAccount/SignUp';//Import Sign Up page
+import OTP from './userAccount/OTP';//Import OTP page
+import ForgotPassword from './userAccount/ForgotPassword';//Import ForgotPassword page
+import ResetPassword from './userAccount/ResetPassword';//Import ResetPassword page
 // 1) Order Stack
 const Stack = createNativeStackNavigator();
 function OrderStack() {
@@ -143,9 +149,35 @@ export const TabNavigator = () => {
   );
 };
 const App = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
     <NavigationContainer>
-      <DrawerNavigator />
+     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {!isLoggedIn?(
+      <> 
+        <Stack.Screen name="Login">
+          {(props) => <Login {...props} onLogin={() => setIsLoggedIn(true)} />} 
+        
+        </Stack.Screen>
+
+        {/*Sign Up, the input data will be link to Customer database */}
+        <Stack.Screen name="SignUp" component={SignUp} />
+
+        {/*OTP page */}
+        <Stack.Screen name="OTP" component={OTP} />
+
+        {/*Forgot Password page */}
+        <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+
+        {/*Reset page */}
+        <Stack.Screen name="ResetPassword" component={ResetPassword} />
+      
+      </>
+    ):(
+      //When Login successful,then stack screen on
+   <Stack.Screen name="MainApp" component={DrawerNavigator} />
+  )}
+</Stack.Navigator>
     </NavigationContainer>
   );
 };

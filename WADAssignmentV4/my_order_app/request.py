@@ -46,6 +46,54 @@ def user(user_id):
     finally:
         if conn:
             conn.close()
+@app.route('/api/login', methods=['POST'])
+def login():
+    conn = None
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        password = data.get('password')
+
+        if not email or not password:
+            return jsonify({"message": "Email and password are required"}), 400
+
+        conn = sqlite3.connect('canteen_app.sqlite')
+        conn.row_factory = sqlite3.Row 
+        
+        # Check if user exists
+        user = conn.execute(
+            "SELECT * FROM users WHERE email = ?", 
+            (email,)
+        ).fetchone()
+        
+        if not user:
+            return jsonify({"message": "Invalid email or password"}), 401
+        
+        # Verify password (in production, use hashed passwords!)
+        if user['password'] != password:
+            return jsonify({"message": "Invalid email or password"}), 401
+        
+        # Get wallet balance
+        wallet = conn.execute(
+            "SELECT balance FROM wallets WHERE user_id = ?", 
+            (user['id'],)
+        ).fetchone()
+        
+        return jsonify({
+            "id": user['id'],
+            "name": user['name'],
+            "email": user['email'],
+            "points": user['points'],
+            "balance": wallet['balance'] if wallet else 0
+        })
+        
+    except sqlite3.Error as e:
+        return jsonify({"message": "Database error"}), 500
+    finally:
+        if conn:
+            conn.close()
+
+
 
 
 if __name__ == '__main__':

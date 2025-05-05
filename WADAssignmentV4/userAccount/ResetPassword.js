@@ -45,7 +45,7 @@ export default function ResetPassword() {
           <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
               
               <Image
-                source={require('../images/temp_logo.jpg')}
+                source={require('../assets/temp_logo.png')}
                 style={styles.logo}
                />
 

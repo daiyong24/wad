@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const FeedbackScreen=()=>{
     const[rating,setRating]= useState(0);
     const[feedback,setFeedback]= useState('');
     const[improvement,setImprovement]=useState('');
+
+    const navigation = useNavigation();
 
     const handleSubmit = () => {
         if (rating === 0) {
@@ -32,6 +35,12 @@ const FeedbackScreen=()=>{
 
     return(
     <ScrollView contentContainer={styles.contentContainer}>
+       <TouchableOpacity
+                  style={styles.backButton}
+                  onPress={() =>  navigation.goBack()}>
+                       <Icon name="arrow-back" size={30} color="#000" />
+        </TouchableOpacity>
+      <View style={styles.headerSpacer}/>
         <Text style ={styles.header}>Feedback</Text>
         <Text style ={styles.header}>We want to hear your opinion</Text>
 
@@ -119,7 +128,7 @@ const styles = StyleSheet.create({
         textAlignVertical: 'top',
       },
       submitButton: {
-        backgroundColor: '#0066cc',
+        backgroundColor: '#FFD700',
         padding: 10,
         borderRadius: 8,
         alignItems: 'center',
@@ -127,10 +136,13 @@ const styles = StyleSheet.create({
         marginBottom: 40,
       },
       submitButtonText: {
-        color: 'white',
+        color: 'black',
         fontSize: 18,
         fontWeight: '600',
       },
+      headerSpacer:{
+        height:50,
+  },
 })
     
 

@@ -97,7 +97,7 @@ export default function OTP() {
               onPress={() => {
                 if (validate()) { 
                   Alert.alert(
-                    "Successful!",
+                    "Account created!",
                     "Please Login.",
                     [
                       { text: "OK", //User click on 'OK' then navigate to Login page
