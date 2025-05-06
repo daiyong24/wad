@@ -5,7 +5,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { TabNavigator } from '../App'; 
 import ProfileScreen from '../screens/ProfileScreen'; 
-import OtherScreen from '../screens/OtherScreen'; 
+import WalletScreen from '../screens/WalletScreen'; 
+import OrderHistory from '../orderscreen/OrderHistory'; 
+
 
 const Drawer = createDrawerNavigator();
 
@@ -21,17 +23,24 @@ const CustomDrawerContent = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate('Profile')}
+        onPress={() => navigation.navigate('MyAccountScreen')}
         style={{ marginVertical: 10 }}
       >
         <Text style={{ fontSize: 18 }}>👤 Profile</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => navigation.navigate('Other')}
+        onPress={() => navigation.navigate('WalletScreen')}
         style={{ marginVertical: 10 }}
       >
-        <Text style={{ fontSize: 18 }}>⭐ Other Page</Text>
+        <Text style={{ fontSize: 18 }}>💰 Wallet Page</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        onPress={() => navigation.navigate('OrderHistory')}
+        style={{ marginVertical: 10 }}
+      >
+        <Text style={{ fontSize: 18 }}>🕒 Order History </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -84,10 +93,23 @@ const DrawerNavigator = () => {
       })}
       />
       <Drawer.Screen
-        name="Other"
-        component={OtherScreen}
+        name="WalletScreen"
+        component={WalletScreen}
         options={({ navigation }) => ({
-          headerTitle: 'Other Page',
+          headerTitle: 'Wallet Page',
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <MaterialCommunityIcons name="arrow-left" size={30} color="black" style={{ marginLeft: 15 }} />
+          </TouchableOpacity>
+          ),
+          headerRight: () => DrawerHeaderRight(navigation),
+        })}
+      />
+      <Drawer.Screen
+        name="OrderHistory"
+        component={OrderHistory}
+        options={({ navigation }) => ({
+          headerTitle: 'Order History',
           headerLeft: () => (
             <TouchableOpacity onPress={() => navigation.goBack()}>
             <MaterialCommunityIcons name="arrow-left" size={30} color="black" style={{ marginLeft: 15 }} />

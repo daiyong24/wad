@@ -44,7 +44,7 @@ export default function ForgotPassword() {
           <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
               
               <Image
-                source={require('../images/temp_logo.jpg')}
+                source={require('../assets/burger.png')}
                 style={styles.logo}
                />
 

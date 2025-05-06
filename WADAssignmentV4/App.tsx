@@ -6,9 +6,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import OrderScreen from './screens/OrderScreen';
 import HomeScreen from './screens/HomeScreen';
-import RewardScreen from './screens/RewardScreen';
 import MoreScreen from './screens/Morescreen/MoreScreenDetails';
 import DrawerNavigator from './screens/Drawer'; // <--- Rename the import (DrawerNavigator)
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import BurgerScreen from './orderscreen/BurgerScreen';
@@ -17,21 +17,32 @@ import NoodleScreen from './orderscreen/NoodleScreen';
 import BeverageScreen from './orderscreen/BeverageScreen';
 import PizzaScreen from './orderscreen/PizzaScreen';
 import DessertScreen from './orderscreen/DessertScreen';
+import OrderHistory from './orderscreen/OrderHistory';
 
-import PromotionFoodDetailScreen from './orderscreen/DetailsScreen/PromotionFoodDetailScreen';
 
-//LenaNote: Double asterisk ('**') the comment mean something needs to be changed
+
 import Login from './userAccount/Login';//Import Login page
 import SignUp from './userAccount/SignUp';//Import Sign Up page
 import OTP from './userAccount/OTP';//Import OTP page
 import ForgotPassword from './userAccount/ForgotPassword';//Import ForgotPassword page
 import ResetPassword from './userAccount/ResetPassword';//Import ResetPassword page
+
+import PromotionFoodDetailScreen from './orderscreen/DetailsScreen/PromotionFoodDetailScreen';
+import CheckoutScreen     from './screens/CheckoutScreen';
+import MyAccountScreen     from './screens/Morescreen/MyAccountScreen';
+
+import ReloadMethodScreen from './walletscreen/ReloadMethodScreen';//Import Sign Up page
+import BankLoginScreen from './walletscreen/BankLoginScreen';//Import Sign Up page
+import CardLoginScreen from './walletscreen/CardLoginScreen';//Import Sign Up page
+import AmountSelectionScreen from './walletscreen/AmountSelectionScreen';//Import Sign Up page
+
 // 1) Order Stack
 const Stack = createNativeStackNavigator();
 function OrderStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: true }}>
-      <Stack.Screen name="OrderHome" component={OrderScreen} options={{ }} />
+      <Stack.Screen name="OrderHome" component={OrderScreen} options={{}} />
+      <Stack.Screen name="OrderScreen" component={OrderScreen} options={{title:'OrderScreen'}} />
       <Stack.Screen name="Promotion" component={PromotionScreen} options={{ title: 'Promotion' }} />
       <Stack.Screen name="Burger" component={BurgerScreen} options={{ title: 'Burger' }} />
       <Stack.Screen name="Noodle" component={NoodleScreen} options={{ title: 'Noodle' }} />
@@ -40,50 +51,60 @@ function OrderStack() {
       <Stack.Screen name="Beverage" component={BeverageScreen} options={{ title: 'Beverage' }} />
       <Stack.Screen name="PromotionFoodDetail" component={PromotionFoodDetailScreen} options={{ title: 'Food Detail' }} />
       <Stack.Screen name="AddToCart" component={require('./screens/AddToCartScreen').default} options={{ title: 'Your Cart' }} />
+      <Stack.Screen name="CheckoutScreen"component={CheckoutScreen} options={{ title: 'Checkout' }}/>
+      <Stack.Screen name="MyAccountScreen"component={MyAccountScreen} options={{ title: 'MyAccountScreen' }}/>
+      <Stack.Screen name="ReloadMethodScreen"component={ReloadMethodScreen} options={{ title: 'Reload Method' }}/>
+      <Stack.Screen name="BankLoginScreen"component={BankLoginScreen} options={{ title: 'Bank Login' }}/>
+      <Stack.Screen name="CardLoginScreen"component={CardLoginScreen} options={{ title: 'Card Method' }}/>
+      <Stack.Screen name="AmountSelectionScreen"component={AmountSelectionScreen} options={{ title: 'Amount Selection' }}/>
+      <Stack.Screen name="OrderHistory"component={OrderHistory} options={{ title: 'Order History '}}/>
     </Stack.Navigator>
   );
 }
 
+
+
 const Tab = createBottomTabNavigator();
+
 
 // Custom Button for TabBar
 const CustomButton = ({ children, onPress, accessibilityState }) => {
-  const focused = accessibilityState?.selected;
+  const focused = accessibilityState.selected;
   return (
-    <View style={{ overflow: 'hidden' }}>
-      <TouchableNativeFeedback onPress={onPress}>
-        <View style={{
-          width: 100,
-          alignItems: 'center',
-          backgroundColor: focused ? 'yellow' : 'transparent',
-          padding: 10,
-          marginBottom: 10
-        }}>
-          {children}
-        </View>
-      </TouchableNativeFeedback>
-    </View>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.7}
+      style={{
+        flex: 1,                     // fill the available width
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: focused ? 'yellow' : 'transparent',
+        paddingVertical: 2,          // tighten up the vertical padding
+        marginBottom: 0,             // remove that gap under the tabs
+      }}
+    >
+      {children}
+    </TouchableOpacity>
   );
 };
 
 // Tab Navigator (Bottom Tabs)
-export const TabNavigator = () => {
+export const TabNavigator = () => { // <--- export it so Drawer can use
   return (
     <Tab.Navigator
-      screenOptions={({ route, navigation }) => ({
-        headerRight: () => 
-          route.name !== 'More' ? (
-            <TouchableOpacity onPress={() => navigation.openDrawer()}>
-              <MaterialCommunityIcons 
-                name="menu" 
-                size={30} 
-                color="black" 
-                style={{ marginLeft: 15 }}
-              />
-            </TouchableOpacity>
-          ) : null,
-      })}
-    >
+    screenOptions={({ route, navigation }) => ({
+      headerRight: () => 
+        route.name !== 'More' ? (
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <MaterialCommunityIcons 
+              name="menu" 
+              size={30} 
+              color="black" 
+              style={{ marginLeft: 15 }}
+            />
+          </TouchableOpacity>
+        ) : null,
+    })}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -113,23 +134,8 @@ export const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Reward"
-        component={RewardScreen}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name="gift"
-              size={focused ? 30 : 20}
-              color={focused ? 'red' : 'gray'}
-            />
-          ),
-          tabBarButton: (props) => <CustomButton {...props} />,
-        }}
-      />
-     <Tab.Screen
-        name="More"
+        name="Morescreen"
         component={MoreScreen}
-        
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
@@ -148,11 +154,14 @@ export const TabNavigator = () => {
     </Tab.Navigator>
   );
 };
+
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false); //Initialize false to simulate status of Login
+  
   return (
     <NavigationContainer>
-     <Stack.Navigator screenOptions={{ headerShown: false }}>
+       <Stack.Navigator screenOptions={{ headerShown: false }}>
       {!isLoggedIn?(
       <> 
         <Stack.Screen name="Login">
@@ -178,6 +187,7 @@ const App = () => {
    <Stack.Screen name="MainApp" component={DrawerNavigator} />
   )}
 </Stack.Navigator>
+    
     </NavigationContainer>
   );
 };

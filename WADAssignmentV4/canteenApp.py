@@ -13,6 +13,8 @@ def initialize_database():
         db.execute('DROP TABLE IF EXISTS menu')  
         db.execute('DROP TABLE IF EXISTS wallets')
         db.execute('DROP TABLE IF EXISTS users')
+        db.execute('DROP TABLE IF EXISTS reloads')
+
         
         # Users table 
         db.execute('''CREATE TABLE users(
@@ -64,6 +66,14 @@ def initialize_database():
             price_at_order REAL NOT NULL,
             FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
             FOREIGN KEY (menu_id) REFERENCES menu(id)
+        )''')
+
+        db.execute('''CREATE TABLE reloads (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            amount REAL NOT NULL,
+            date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         )''')
         
        

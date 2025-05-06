@@ -1,20 +1,54 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, Image, ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default function NoodleScreen() {
-    const navigation = useNavigation();
-  
+// Map item names to local images
+const IMAGES = {
+  'Meatball Pasta': require('../assets/MeatballPasta.png'),
+  'Seafood Agio Oglio': require('../assets/SeafoodAgioOglio.png'),
+  'Vegetable Lo Mein': require('../assets/VeggieLoMein.png'),
+  // add more mappings as needed
+};
+
+export default function OrderScreen() {
+  const [mains, setMains] = useState(null);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    fetch('http://10.0.2.2:5000/api/menu') // Android emulator host
+      .then((r) => r.json())
+      .then((data) => setMains(data.filter((i) => i.category === 'noodle')))
+      .catch(() => setMains([]));
+  }, []);
+
+  if (mains === null) return <ActivityIndicator style={styles.loader} />;
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Today's Promotions</Text>
-      {/* Render your promos here */}
-      <Text>- Noodle</Text>
-      <Text>- 20% off all Noodles</Text>
+    <View style={{ flex: 1 }}>
+      <ScrollView contentContainerStyle={styles.container}>
+        {mains.map((item) => (
+          <TouchableOpacity
+            key={item.id}
+            style={styles.card}
+            onPress={() => navigation.navigate('PromotionFoodDetail', { item })}
+          >
+            <Image
+              source={IMAGES[item.name] || require('../assets/pasta.png')} // fallback image
+              style={styles.icon}
+            />
+            <View style={styles.cardDetails}>
+              <Text style={styles.title}>{item.name}</Text>
+              <Text style={styles.price}>{`$${item.price.toFixed(2)}`}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
       <TouchableOpacity
         style={styles.fab}
-        onPress={() => navigation.navigate('AddToCart')}>
+        onPress={() => navigation.navigate('AddToCart')}
+      >
         <MaterialCommunityIcons name="cart" size={28} color="#fff" />
       </TouchableOpacity>
     </View>
@@ -22,14 +56,33 @@ export default function NoodleScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    alignItems: 'flex-start',
+  loader: { flex: 1, justifyContent: 'center' },
+  container: { padding: 16, alignItems: 'center' },
+  card: {
+    flexDirection: 'row',
+    marginBottom: 18,
+    backgroundColor: '#fff',
+    padding: 16,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
+    width: '100%',
+    alignItems: 'center',
   },
+  icon: { width: 80, height: 80, borderRadius: 8, marginRight: 16 },
+  cardDetails: { flex: 1 },
   title: {
-    fontSize: 24,
-    marginBottom: 16,
+    fontSize: 20,
+    fontWeight: '700',
+    marginBottom: 4,
+    color: '#333',
+  },
+  price: {
+    fontSize: 18,
+    color: '#888',
   },
   fab: {
     position: 'absolute',
@@ -38,13 +91,13 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#e91e63',    // or your theme color
+    backgroundColor: '#e91e63', // or your theme color
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 6,                // Android shadow
-    shadowColor: '#000',         // iOS shadow
+    elevation: 6, // Android shadow
+    shadowColor: '#000', // iOS shadow
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
-  }
+  },
 });
