@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#e91e63', // or your theme color
+    backgroundColor: '#FFD700', // or your theme color
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 6, // Android shadow

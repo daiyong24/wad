@@ -195,13 +195,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   smallButtonText: {
-    color: '#0066cc',
+    color: '#333',
     fontSize: 14,
   },
   loginButton: {
     width: '100%',
     height: 50,
-    backgroundColor: '#0066cc',
+    backgroundColor: '#FFD700',
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#99c2ff',
   },
   buttonText: {
-    color: '#fff',
+    color: '#333',
     fontSize: 18,
     fontWeight: 'bold',
   },

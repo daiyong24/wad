@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   button: {
-    backgroundColor: '#28a745',
+    backgroundColor: '#FFD700',
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 8,
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: 'black',
     fontSize: 18,
     fontWeight: '600',
   },

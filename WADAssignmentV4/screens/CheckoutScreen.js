@@ -144,7 +144,7 @@ export default function CheckoutScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 24 },
-  title: { fontSize: 24, marginBottom: 16 },
+  title: { color:'#000000',fontSize: 30, marginBottom: 16 ,fontWeight: 'bold'},
   empty: { textAlign: 'center', marginTop: 50, fontSize: 16 },
   list: { flex: 1 },
   row: {
@@ -158,23 +158,23 @@ const styles = StyleSheet.create({
   lineTotal: { flex: 1, textAlign: 'right', fontSize: 16 },
   totalRow: {
     borderTopWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#000000',
     marginTop: 16,
     paddingTop: 8,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  totalLabel: { fontSize: 18, fontWeight: 'bold' },
-  totalValue: { fontSize: 18, fontWeight: 'bold' },
+  totalLabel: { color: '#000000',fontSize: 18, fontWeight: 'bold' },
+  totalValue: { color: '#000000',fontSize: 18, fontWeight: 'bold' },
   payBtn: {
     marginTop: 12,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#FFD700',
     paddingVertical: 14,
     borderRadius: 6,
     alignItems: 'center',
   },
   payBtnText: {
-    color: '#fff',
+    color: '#000000',
     fontSize: 18,
     fontWeight: '600',
   },
@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
     right: 16,
   },
   balanceText: {
+    color:'#f20a0e',
     fontSize: 18,
     fontWeight: 'bold',
   },

@@ -51,7 +51,7 @@ export default function AddToCartScreen() {
               <Text style={styles.name}>{item.name}</Text>
               <Text>×{item.quantity}</Text>
               <TouchableOpacity onPress={() => changeQty(item.id, item.quantity + 1)}>
-                <Text style={styles.btnText}>＋</Text>
+                <Text style={styles.add}>＋</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={() => changeQty(item.id, item.quantity - 1)}>
                 <Text style={styles.btnText}>－</Text>
@@ -94,8 +94,9 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     paddingHorizontal: 16,
   },
-  name: { flex: 1 },
-  btnText: { fontSize: 18, paddingHorizontal: 8 },
+  name: { flex: 1 , fontSize:20},
+  btnText: { color: 'black' ,fontSize: 18, paddingHorizontal: 8 },
+  add: { color: '#0004f5', paddingHorizontal: 8 },
   delete: { color: 'red', paddingHorizontal: 8 },
   footer: {
     flexDirection: 'row',
@@ -112,13 +113,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   primaryBtn: {
-    backgroundColor: '#007AFF',
+    backgroundColor: '#FFD700',
   },
   secondaryBtn: {
     borderWidth: 1,
-    borderColor: '#007AFF',
+    borderColor: '#f20a0e',
   },
   footerBtnText: {
+     color: '#f20a0e',
     fontSize: 16,
   },
 });

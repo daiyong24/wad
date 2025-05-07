@@ -4,9 +4,9 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { TabNavigator } from '../App'; 
-import ProfileScreen from '../screens/ProfileScreen'; 
 import WalletScreen from '../screens/WalletScreen'; 
 import OrderHistory from '../orderscreen/OrderHistory'; 
+import MyAccountScreen from './Morescreen/MyAccountScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -81,7 +81,7 @@ const DrawerNavigator = () => {
       />
       <Drawer.Screen
       name="Profile"
-      component={ProfileScreen}
+      component={MyAccountScreen}
       options={({ navigation }) => ({
         headerTitle: 'Profile',
         headerLeft: () => (

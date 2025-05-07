@@ -1,14 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const AboutUsScreen = () => {
+  const navigation = useNavigation();
   return (
+
     <ScrollView contentContainerStyle={styles.container}>
-      
-       <View style={styles.headerSpacer}/>
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={() => navigation.goBack()}>
+        <Icon name="arrow-back" size={30} color="#000"/>
+      </TouchableOpacity>
+      <View style={styles.headerSpacer} />
       <Text style={styles.header}>About Us</Text>
-      
+
       <View style={styles.section}>
         <Icon name="fastfood" size={24} color="#4CAF50" style={styles.icon} />
         <Text style={styles.sectionTitle}>Our Mission</Text>
@@ -82,13 +89,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#444',
     marginBottom: 10,
-    marginLeft: 30, 
+    marginLeft: 30,
   },
   sectionText: {
     fontSize: 15,
     color: '#666',
     lineHeight: 22,
-    marginLeft: 30, 
+    marginLeft: 30,
   },
   icon: {
     position: 'absolute',
@@ -97,13 +104,17 @@ const styles = StyleSheet.create({
   },
   footer: {
     marginTop: 20,
-    color: '#999',
+    color: '#000000',
     fontSize: 12,
   },
-
-  headerSpacer:{
-    height:100,
+  backButton: {
+    alignSelf: 'flex-start',
+    marginBottom: 20,
 },
+
+  headerSpacer: {
+    height: 100,
+  },
 });
 
 export default AboutUsScreen;

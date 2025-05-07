@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     },
   
    bigButton: {
-      backgroundColor: 'blue',
+      backgroundColor: '#FFD700',
       paddingVertical: 12,
       paddingHorizontal: 32,
       borderRadius: 8,
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
     button: {
       width: '100%',
       height: 50,
-      backgroundColor: '#1E90FF',
+      backgroundColor: '#FFD700',
       borderRadius: 8,
       justifyContent: 'center',
       alignItems: 'center',
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     },
   
     buttonText: {
-      color: '#fff',
+      color: '#000000',
       fontSize: 20,
     },
 
@@ -279,13 +279,13 @@ const styles = StyleSheet.create({
       top: 40,              
       left: 10,             
       padding: 8,
-      backgroundColor: '#e0e0e0',
+      backgroundColor: '#RRGGBB00',
       borderRadius: 8,
     },
     
     backButtonText: {
       fontSize: 18,
-      color: 'black',
+      color: '#000000',
     },
 
     icon: {

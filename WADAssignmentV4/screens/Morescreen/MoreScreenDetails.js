@@ -32,7 +32,7 @@ const MoreMainScreen =({navigation}) =>{
             screen: 'LogoutScreen',
           },
     ]
-    
+
     return(
         <View style={styles.container}>
         <View style={styles.headerSpacer}/>

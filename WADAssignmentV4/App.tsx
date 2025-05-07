@@ -134,12 +134,12 @@ export const TabNavigator = () => { // <--- export it so Drawer can use
         }}
       />
       <Tab.Screen
-        name="Morescreen"
+        name="More"
         component={MoreScreen}
         options={{
           tabBarIcon: ({ focused }) => (
             <MaterialCommunityIcons
-              name="cog"
+              name="dots-horizontal"
               size={focused ? 30 : 20}
               color={focused ? 'red' : 'gray'}
             />

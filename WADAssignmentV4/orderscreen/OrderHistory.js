@@ -40,7 +40,6 @@ export default function OrderHistoryScreen() {
               <Text style={styles.orderText}>Order ID: {item.order_id}</Text>
               <Text style={styles.orderText}>Status: {item.status}</Text>
               <Text style={styles.orderText}>Total Price: RM {item.total_price}</Text>
-              <Text style={styles.orderText}>Created At: {item.created_at}</Text>
               {item.completed_at && <Text style={styles.orderText}>Completed At: {item.completed_at}</Text>}
               <Text style={styles.itemsText}>Items:</Text>
               {item.items.map((itemDetail, index) => (
@@ -62,6 +61,7 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
+    color:'#000000',
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
@@ -75,10 +75,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     padding: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#FFD700',
     borderRadius: 8,
   },
   orderText: {
+    color:'#000000',
     fontSize: 16,
     marginBottom: 5,
   },

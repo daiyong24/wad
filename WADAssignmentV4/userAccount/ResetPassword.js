@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     },
   
    bigButton: {
-      backgroundColor: 'blue',
+      backgroundColor: '#FFD700',
       paddingVertical: 12,
       paddingHorizontal: 32,
       borderRadius: 8,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
     },
   
     buttonText: {
-      color: 'white',
+      color: '#000000',
       fontSize: 24,
       fontWeight: 'bold',
     },

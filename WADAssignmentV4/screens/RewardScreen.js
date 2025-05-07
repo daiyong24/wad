@@ -35,11 +35,11 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: '#e91e63',    // or your theme color
+    backgroundColor: '#e91e63',    
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 6,                // Android shadow
-    shadowColor: '#000',         // iOS shadow
+    elevation: 6,               
+    shadowColor: '#000',         
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
