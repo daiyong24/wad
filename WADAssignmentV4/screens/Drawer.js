@@ -44,7 +44,7 @@ const CustomDrawerContent = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        onPress={() => alert('Logging out...')}
+        onPress={() => navigation.navigate('Login1')}
         style={{ marginVertical: 10 }}
       >
         <Text style={{ fontSize: 18, color: 'red' }}>🚪 Logout</Text>

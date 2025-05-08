@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, TouchableNativeFeedback, TouchableOpacity, Text, Image, ScrollView, StyleSheet } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 
 import OrderScreen from './screens/OrderScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -26,6 +27,7 @@ import SignUp from './userAccount/SignUp';//Import Sign Up page
 import OTP from './userAccount/OTP';//Import OTP page
 import ForgotPassword from './userAccount/ForgotPassword';//Import ForgotPassword page
 import ResetPassword from './userAccount/ResetPassword';//Import ResetPassword page
+import Login1 from './userAccount/login1';//Import ResetPassword page
 
 import PromotionFoodDetailScreen from './orderscreen/DetailsScreen/PromotionFoodDetailScreen';
 import CheckoutScreen     from './screens/CheckoutScreen';
@@ -40,15 +42,7 @@ import AmountSelectionScreen from './walletscreen/AmountSelectionScreen';//Impor
 const Stack = createNativeStackNavigator();
 function OrderStack() {
   return (
-    <Stack.Navigator screenOptions={{ 
-      headerShown: true,
-      headerTitle: () => (
-        <View style={{ flexDirection: 'row' }}>
-          <Text style={{ color: 'red', fontWeight: 'bold' ,fontSize:20}}>Order</Text>
-          <Text style={{ color: '#FFD700', fontWeight: 'bold',fontSize:20 }}>Home</Text>
-        </View>
-      )
-    }}>
+    <Stack.Navigator screenOptions={{ headerShown: true }}>
       <Stack.Screen name="OrderHome" component={OrderScreen} options={{}} />
       <Stack.Screen name="OrderScreen" component={OrderScreen} options={{title:'OrderScreen'}} />
       <Stack.Screen name="Promotion" component={PromotionScreen} options={{ title: 'Promotion' }} />
@@ -65,6 +59,7 @@ function OrderStack() {
       <Stack.Screen name="BankLoginScreen"component={BankLoginScreen} options={{ title: 'Bank Login' }}/>
       <Stack.Screen name="CardLoginScreen"component={CardLoginScreen} options={{ title: 'Card Method' }}/>
       <Stack.Screen name="AmountSelectionScreen"component={AmountSelectionScreen} options={{ title: 'Amount Selection' }}/>
+      <Stack.Screen name="Login1" component={Login1} options={{headerShown: false}}/>
       <Stack.Screen name="OrderHistory"component={OrderHistory} options={{ title: 'Order History '}}/>
     </Stack.Navigator>
   );
@@ -101,17 +96,16 @@ export const TabNavigator = () => { // <--- export it so Drawer can use
   return (
     <Tab.Navigator
     screenOptions={({ route, navigation }) => ({
-      headerRight: () => 
-        route.name !== 'More' ? (
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <MaterialCommunityIcons 
-              name="menu" 
-              size={30} 
-              color="black" 
-              style={{ marginLeft: 15 }}
-            />
-          </TouchableOpacity>
-        ) : null,
+      headerRight: () => {
+        // if Login1 is the active screen in this tab, don’t show the menu button
+        const focusedRoute = getFocusedRouteNameFromRoute(route) ?? route.name;
+        if (focusedRoute === 'Login1') return null;
+          return (
+            <TouchableOpacity onPress={() => navigation.openDrawer()}>
+            <MaterialCommunityIcons name="menu" size={30} color="black" style={{ marginLeft: 15 }}/>
+            </TouchableOpacity>
+          );
+        },
     })}>
       <Tab.Screen
         name="Home"
@@ -128,19 +122,30 @@ export const TabNavigator = () => { // <--- export it so Drawer can use
         }}
       />
       <Tab.Screen
-        name="Order"
-        component={OrderStack}
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <MaterialCommunityIcons
-              name="clipboard-text"
-              size={focused ? 30 : 20}
-              color={focused ? 'red' : 'gray'}
-            />
-          ),
-          tabBarButton: (props) => <CustomButton {...props} />,
-        }}
-      />
+      name="Order"
+       component={OrderStack}
+       options={({ route }) => {
+         // figure out which nested screen is active
+         const focusedRoute = getFocusedRouteNameFromRoute(route) ?? 'OrderHome';
+         const isLogout = focusedRoute === 'Login1';
+         return {
+          // hide the top header on Login1
+          headerShown: !isLogout,
+           tabBarIcon: ({ focused }) => (
+             <MaterialCommunityIcons
+               name="clipboard-text"
+               size={focused?30:20}
+               color={focused?'red':'gray'}
+             />
+           ),
+           tabBarButton: (props) => <CustomButton {...props} />,
+           // hide the entire tab bar when Login1 is visible
+           tabBarStyle: focusedRoute === 'Login1'
+             ? { display: 'none' }
+             : undefined,
+        };
+       }}
+     />
       <Tab.Screen
         name="More"
         component={MoreScreen}
@@ -154,10 +159,9 @@ export const TabNavigator = () => { // <--- export it so Drawer can use
           ),
           tabBarButton: (props) => <CustomButton {...props} />,
           headerRight: () => 
-            <View style={{ flexDirection: 'row' }}>
-          <Text style={{ color: 'red', fontWeight: 'bold' ,fontSize:20}}>Canteen</Text>
-          <Text style={{ color: '#FFD700', fontWeight: 'bold',fontSize:20 }}>App</Text>
-        </View>    
+            <Image
+          source={require('./assets/temp_logo.png')} 
+          style={{ width: 150, height: 150, marginRight: 1.5 }}/>     
         }}
       />
     </Tab.Navigator>
