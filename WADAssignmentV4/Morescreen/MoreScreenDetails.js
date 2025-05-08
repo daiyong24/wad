@@ -42,7 +42,7 @@ const MoreMainScreen =({navigation}) =>{
                 key={index}
                 style={styles.menuItem}
                 onPress={()=> navigation.navigate(item.screen)}>
-                    <Icon name={item.icon} size={34} color="FF000" style={styles.icon}/>
+                    <Icon name={item.icon} size={34} color='#FFD700' style={styles.icon}/>
                     <Text style={styles.menuText}>{item.title}</Text>
                     <Icon name="chevron-right" size={24} color='#999'/>
                 </TouchableOpacity>
@@ -87,8 +87,9 @@ const styles= StyleSheet.create({
         marginRight: 16,
       },
       menuText: {
+        color: '#000000',
         flex: 1,
-        fontSize: 16,
+        fontSize: 18,
       },
       headerSpacer:{
             height:100,

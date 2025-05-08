@@ -30,7 +30,6 @@ const AboutUsScreen = () => {
         <Text style={styles.sectionText}>
           • Top Up Money to the wallet{'\n'}
           • Using the wallet money to purchase items{'\n'}
-          • When you reach a certain points you can exchange your points for items{'\n'}
         </Text>
       </View>
 
@@ -38,7 +37,7 @@ const AboutUsScreen = () => {
         <Icon name="group" size={24} color="#FF5722" style={styles.icon} />
         <Text style={styles.sectionTitle}>Our Team</Text>
         <Text style={styles.sectionText}>
-          Developed by UTAR software developers.
+          Developed by UTAR Software Developers.
         </Text>
       </View>
 

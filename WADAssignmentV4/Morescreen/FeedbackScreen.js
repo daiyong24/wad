@@ -128,12 +128,14 @@ const styles = StyleSheet.create({
         textAlignVertical: 'top',
       },
       submitButton: {
+        width: '50%',
+        height: 50,
         backgroundColor: '#FFD700',
-        padding: 10,
-        borderRadius: 8,
+        borderRadius: 10,
+        justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 20,
-        marginBottom: 40,
+        marginBottom: 20,
+        alignSelf: 'center',
       },
       submitButtonText: {
         color: 'black',

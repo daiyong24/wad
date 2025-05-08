@@ -118,7 +118,7 @@ export default function AmountSelectionScreen() {
       </Text>
 
       {/* Display User Balance */}
-      <Text style={styles.balanceText}>Current Balance: ${balance}</Text>
+      <Text style={styles.balanceText}>Current Balance: ${balance.toFixed(2)}</Text>
 
       {/* Reload Button */}
       <TouchableOpacity style={styles.reloadButton} onPress={handleReload} disabled={loading}>

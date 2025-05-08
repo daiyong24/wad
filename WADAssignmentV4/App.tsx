@@ -40,7 +40,15 @@ import AmountSelectionScreen from './walletscreen/AmountSelectionScreen';//Impor
 const Stack = createNativeStackNavigator();
 function OrderStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: true }}>
+    <Stack.Navigator screenOptions={{ 
+      headerShown: true,
+      headerTitle: () => (
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ color: 'red', fontWeight: 'bold' ,fontSize:20}}>Order</Text>
+          <Text style={{ color: '#FFD700', fontWeight: 'bold',fontSize:20 }}>Home</Text>
+        </View>
+      )
+    }}>
       <Stack.Screen name="OrderHome" component={OrderScreen} options={{}} />
       <Stack.Screen name="OrderScreen" component={OrderScreen} options={{title:'OrderScreen'}} />
       <Stack.Screen name="Promotion" component={PromotionScreen} options={{ title: 'Promotion' }} />
@@ -146,9 +154,10 @@ export const TabNavigator = () => { // <--- export it so Drawer can use
           ),
           tabBarButton: (props) => <CustomButton {...props} />,
           headerRight: () => 
-            <Image
-          source={require('./assets/temp_logo.png')} 
-          style={{ width: 150, height: 150, marginRight: 1.5 }}/>     
+            <View style={{ flexDirection: 'row' }}>
+          <Text style={{ color: 'red', fontWeight: 'bold' ,fontSize:20}}>Canteen</Text>
+          <Text style={{ color: '#FFD700', fontWeight: 'bold',fontSize:20 }}>App</Text>
+        </View>    
         }}
       />
     </Tab.Navigator>

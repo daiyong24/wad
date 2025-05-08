@@ -35,7 +35,7 @@ export default function WalletScreen() {
     <SafeAreaView style={styles.container}>
       {/* Display User Balance */}
       <View style={styles.balanceContainer}>
-        <Text style={styles.balanceText}>Balance: ${balance}</Text>
+        <Text style={styles.balanceText}>Balance: ${balance.toFixed(2)}</Text>
       </View>
 
       {/* Reload Button */}
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   reloadButton: {
     backgroundColor: '#4CAF50',
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 55,
     borderRadius: 5,
   },
   reloadButtonText: {
