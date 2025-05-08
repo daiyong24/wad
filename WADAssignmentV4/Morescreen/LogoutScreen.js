@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { View, Text, Alert, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, Alert} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import SignUp from '../../userAccount/SignUp';
+import SignUp from '../userAccount/SignUp';
 
 const LogoutScreenScreen=()=>{
     const navigation = useNavigation();

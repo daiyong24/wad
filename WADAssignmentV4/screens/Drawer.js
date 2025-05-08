@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { TabNavigator } from '../App'; 
 import WalletScreen from '../screens/WalletScreen'; 
 import OrderHistory from '../orderscreen/OrderHistory'; 
-import MyAccountScreen from './Morescreen/MyAccountScreen';
+import MyAccountScreen from '../Morescreen/MyAccountScreen';
 
 
 const Drawer = createDrawerNavigator();

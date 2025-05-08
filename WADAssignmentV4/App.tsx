@@ -6,7 +6,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import OrderScreen from './screens/OrderScreen';
 import HomeScreen from './screens/HomeScreen';
-import MoreScreen from './screens/Morescreen/MoreScreenDetails';
+import MoreScreen from './Morescreen/MoreScreenDetails';
 import DrawerNavigator from './screens/Drawer'; // <--- Rename the import (DrawerNavigator)
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -29,7 +29,7 @@ import ResetPassword from './userAccount/ResetPassword';//Import ResetPassword p
 
 import PromotionFoodDetailScreen from './orderscreen/DetailsScreen/PromotionFoodDetailScreen';
 import CheckoutScreen     from './screens/CheckoutScreen';
-import MyAccountScreen     from './screens/Morescreen/MyAccountScreen';
+import MyAccountScreen     from './Morescreen/MyAccountScreen';
 
 import ReloadMethodScreen from './walletscreen/ReloadMethodScreen';//Import Sign Up page
 import BankLoginScreen from './walletscreen/BankLoginScreen';//Import Sign Up page
